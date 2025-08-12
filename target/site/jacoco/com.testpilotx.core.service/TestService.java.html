@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TestService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TestPilotX Core</a> &gt; <a href="index.source.html" class="el_package">com.testpilotx.core.service</a> &gt; <span class="el_source">TestService.java</span></div><h1>TestService.java</h1><pre class="source lang-java linenums">package com.testpilotx.core.service;
+
+import com.testpilotx.core.model.TestCase;
+import com.testpilotx.core.model.TestResult;
+import org.springframework.stereotype.Service;
+
+import java.util.*;
+
+@Service
+<span class="fc" id="L10">public class TestService {</span>
+<span class="fc" id="L11">    private final Map&lt;String, TestCase&gt; testCases = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L12">    private final List&lt;TestResult&gt; results = new ArrayList&lt;&gt;();</span>
+
+    public List&lt;TestCase&gt; getAllTests() {
+<span class="nc" id="L15">        return new ArrayList&lt;&gt;(testCases.values());</span>
+    }
+
+    public TestCase createTest(TestCase testCase) {
+<span class="fc" id="L19">        testCases.put(testCase.getId(), testCase);</span>
+<span class="fc" id="L20">        return testCase;</span>
+    }
+
+    public TestResult runTest(String id) {
+<span class="fc" id="L24">        TestCase testCase = testCases.get(id);</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        if (testCase == null) return new TestResult(id, false, &quot;Test not found&quot;);</span>
+
+<span class="fc" id="L27">        boolean passed = testCase.getScript().contains(&quot;assert&quot;);</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        String output = passed ? &quot;Test passed.&quot; : &quot;Assertion failed.&quot;;</span>
+<span class="fc" id="L29">        TestResult result = new TestResult(id, passed, output);</span>
+<span class="fc" id="L30">        results.add(result);</span>
+<span class="fc" id="L31">        return result;</span>
+    }
+
+    public List&lt;TestResult&gt; getAllResults() {
+<span class="nc" id="L35">        return results;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

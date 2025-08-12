@@ -1,0 +1,5 @@
+com\testpilotx\core\model\TestResult.class
+com\testpilotx\core\TestPilotXApplication.class
+com\testpilotx\core\model\TestCase.class
+com\testpilotx\core\service\TestService.class
+com\testpilotx\core\controller\TestController.class
