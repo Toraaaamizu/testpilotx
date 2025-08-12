@@ -3,7 +3,6 @@ package com.testpilotx.core.controller;
 import com.testpilotx.core.model.TestCase;
 import com.testpilotx.core.model.TestResult;
 import com.testpilotx.core.service.TestService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -15,8 +14,12 @@ import java.util.List;
 @Tag(name = "Test API", description = "Operations related to test cases")
 public class TestController {
 
-    @Autowired
-    private TestService testService;
+    private final TestService testService;
+
+    // Use constructor injection — works better with @WebMvcTest mocking
+    public TestController(TestService testService) {
+        this.testService = testService;
+    }
 
     @Operation(summary = "List all tests")
     @GetMapping

@@ -1,6 +1,0 @@
-GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-TestPilotX Core,com.testpilotx.core.model,TestResult,22,21,0,0,6,8,6,3,6,3
-TestPilotX Core,com.testpilotx.core.model,TestCase,7,28,0,0,2,9,2,7,2,7
-TestPilotX Core,com.testpilotx.core.controller,TestController,21,0,0,0,5,0,5,0,5,0
-TestPilotX Core,com.testpilotx.core,TestPilotXApplication,8,0,0,0,3,0,2,0,2,0
-TestPilotX Core,com.testpilotx.core.service,TestService,10,62,0,4,2,12,2,5,2,3

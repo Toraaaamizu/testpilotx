@@ -16,12 +16,12 @@
         <spring.boot.version>3.2.4</spring.boot.version>
     </properties>
 
-<parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.2.4</version> <!-- Use literal value here -->
-    <relativePath/> <!-- optional if not using a multi-module setup -->
-</parent>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.4</version>
+        <relativePath/>
+    </parent>
 
     <dependencies>
         <!-- Web starter for REST APIs and web applications -->
@@ -30,13 +30,28 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <!-- Mockito with inline mocking -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-inline</artifactId>
+            <version>5.2.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Override Byte Buddy to support Java 24 -->
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <version>1.14.10</version>
+            <scope>test</scope>
+        </dependency>
+
         <!-- Spring Boot test starter with JUnit 5 support -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
             <exclusions>
-                <!-- Exclude JUnit 4 to avoid conflicts -->
                 <exclusion>
                     <groupId>org.junit.vintage</groupId>
                     <artifactId>junit-vintage-engine</artifactId>
@@ -62,13 +77,13 @@
 
     <build>
         <plugins>
-            <!-- Spring Boot plugin for packaging and running -->
+            <!-- Spring Boot plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-            <!-- Compiler plugin to ensure Java 17 compatibility -->
+            <!-- Compiler plugin for Java 17 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -78,41 +93,42 @@
                 </configuration>
             </plugin>
 
-            <!-- Surefire plugin to run JUnit 5 tests -->
+            <!-- Surefire plugin for running tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.1.2</version>
                 <configuration>
-                    <useModulePath>false</useModulePath> <!-- Ensures compatibility with Java 17 -->
+                    <useModulePath>false</useModulePath>
+                    <argLine>-Dnet.bytebuddy.experimental=true</argLine>
                 </configuration>
             </plugin>
 
-            <!-- JaCoCo plugin for code coverage reports -->
+            <!-- JaCoCo plugin for code coverage -->
             <plugin>
-    			<groupId>org.jacoco</groupId>
-    			<artifactId>jacoco-maven-plugin</artifactId>
-    			<version>0.8.12</version>
-    			<executions>
-        		<execution>
-            		<goals>
-                		<goal>prepare-agent</goal>
-            		</goals>
-        		</execution>
-        		<execution>
-            		<id>report</id>
-            		<phase>prepare-package</phase>
-            		<goals>
-                		<goal>report</goal>
-            		</goals>
-        		</execution>
-    		</executions>
-    		<configuration>
-    	<excludes>
-        <exclude>sun/util/resources/**</exclude>
-    	</excludes>
-</configuration>
-		</plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.12</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <excludes>
+                        <exclude>sun/util/resources/**</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
