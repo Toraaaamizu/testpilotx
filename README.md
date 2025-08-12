@@ -1,6 +1,6 @@
 # TestPilotX Core
 
-![Build Status](https://github.com/Toraaaamizu/testpilotx/tree/main/.github/workflows/ci.yaml/badge.svg)
+![Build Status](https://github.com/Toraaaamizu/testpilotx/actions/workflows/ci.yaml/badge.svg)
 [![Coverage](https://codecov.io/gh/Toraaaamizu/testpilotx-core/branch/main/graph/badge.svg)](https://codecov.io/gh/YOUR_GITHUB_USERNAME/testpilotx-core)
 
 
